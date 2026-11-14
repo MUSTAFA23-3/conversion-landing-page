@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SwiftRoute Logistics — B2B Smart Delivery & Freight Automation</title>
+  <meta name="description" content="Enterprise B2B logistics, instant freight quoting, and real-time API-driven delivery orchestration." />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 28 28'><rect width='28' height='28' rx='8' fill='%232563EB'/><path d='M7 18L13 10L17 15L21 9' stroke='%23FFFFFF' stroke-width='2.4' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- Sticky Glassmorphism Navbar -->
+  <header class="navbar" id="navbar">
+    <div class="container nav-inner">
+      <a href="#top" class="brand" aria-label="SwiftRoute Logistics Home">
+        <span class="brand-mark" aria-hidden="true">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+            <rect width="28" height="28" rx="8" fill="#2563EB"/>
+            <path d="M7 18L13 10L17 15L21 9" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="21" cy="9" r="2" fill="#10B981"/>
+          </svg>
+        </span>
+        <span class="brand-name">SwiftRoute<span class="brand-accent">Logistics</span></span>
+      </a>
+
+      <nav class="nav-links" aria-label="Primary Navigation">
+        <a href="#services">Solutions</a>
+        <a href="#calculator">Quote Estimator</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="#calculator" class="btn btn-ghost btn-sm">Calculate Rate</a>
+        <a href="#contact" class="btn btn-primary btn-sm">Book Demo</a>
+        <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle Menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Drawer -->
+    <div class="mobile-menu" id="mobileMenu" hidden>
+      <a href="#services" class="mobile-link">Solutions</a>
+      <a href="#calculator" class="mobile-link">Quote Estimator</a>
+      <a href="#faq" class="mobile-link">FAQ</a>
+      <a href="#contact" class="mobile-link">Contact</a>
+      <a href="#contact" class="btn btn-primary btn-block">Book Enterprise Demo</a>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- Hero Section + Instant Shipping Quote Estimator -->
+    <section class="hero" id="calculator">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <div class="status-pill">
+            <span class="pulse-dot"></span>
+            <span>99.4% On-Time SLA Across 48 Regional Hubs</span>
+          </div>
+          <h1>Predictable B2B Freight &amp; <span class="text-gradient">Smart Last-Mile</span> Delivery</h1>
+          <p class="hero-subtitle">
+            Eliminate opaque freight brokers and manual dispatch spreadsheets. Get instant algorithmic rate quotes, automated API tracking, and dedicated fleet SLAs built for high-growth B2B teams.
+          </p>
+
+          <div class="hero-cta-row">
+            <a href="#contact" class="btn btn-primary btn-lg">Start Shipping Today</a>
+            <a href="#services" class="btn btn-outline btn-lg">Explore Solutions</a>
+          </div>
+
+          <div class="trust-metrics">
+            <div class="metric-item">
+              <strong>450+</strong>
+              <span>B2B Partners</span>
+            </div>
+            <div class="metric-divider"></div>
+            <div class="metric-item">
+              <strong>2.4M+</strong>
+              <span>Shipments Routed</span>
+            </div>
+            <div class="metric-divider"></div>
+            <div class="metric-item">
+              <strong>&lt;15m</strong>
+              <span>API Dispatch Sync</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Interactive JS Quote Estimator Card -->
+        <aside class="quote-card" aria-label="Instant Shipping Quote Estimator">
+          <div class="quote-card-header">
+            <div>
+              <span class="eyebrow">LIVE RATE ENGINE</span>
+              <h2>Instant Shipping Quote</h2>
+            </div>
+            <span class="badge-live">Real-Time</span>
+          </div>
+
+          <form id="quoteForm" class="quote-form" novalidate>
+            <div class="form-group">
+              <label for="routeZone">Shipping Corridor</label>
+              <select id="routeZone" name="routeZone">
+                <option value="metro" data-base="28" data-rate="1.15" data-eta="Same Day (4–6 hrs)">Domestic Metro Express</option>
+                <option value="regional" data-base="45" data-rate="1.45" data-eta="Next Business Day">Regional Hub Network</option>
+                <option value="national" data-base="82" data-rate="2.10" data-eta="2–3 Business Days">Cross-Country Freight</option>
+                <option value="intl" data-base="145" data-rate="4.25" data-eta="3–5 Business Days">International Air Cargo</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <div class="label-row">
+                <label for="weightRange">Total Shipment Weight (kg)</label>
+                <span class="weight-pill"><span id="weightDisplay">45</span> kg</span>
+              </div>
+              <input type="range" id="weightRange" min="1" max="500" value="45" />
+              <div class="range-ticks">
+                <span>1 kg</span>
+                <span>250 kg</span>
+                <span>500 kg</span>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Service Tier</label>
+              <div class="tier-grid" role="radiogroup" aria-label="Service Tier">
+                <label class="tier-option">
+                  <input type="radio" name="serviceTier" value="standard" data-mult="1.0" checked />
+                  <span class="tier-box">
+                    <strong>Standard</strong>
+                    <small>1.0x Base</small>
+                  </span>
+                </label>
+                <label class="tier-option">
+                  <input type="radio" name="serviceTier" value="priority" data-mult="1.35" />
+                  <span class="tier-box">
+                    <strong>Priority</strong>
+                    <small>1.35x Fast</small>
+                  </span>
+                </label>
+                <label class="tier-option">
+                  <input type="radio" name="serviceTier" value="coldchain" data-mult="1.65" />
+                  <span class="tier-box">
+                    <strong>Cold-Chain</strong>
+                    <small>1.65x Temp</small>
+                  </span>
+                </label>
+              </div>
+            </div>
+
+            <label class="checkbox-row">
+              <input type="checkbox" id="insuranceCheck" checked />
+              <span>Include Full Cargo Protection (+3.5% Insured Value)</span>
+            </label>
+
+            <!-- Live Calculation Result -->
+            <div class="quote-output" aria-live="polite">
+              <div class="output-top">
+                <div>
+                  <span class="output-label">Estimated Total</span>
+                  <div class="output-price" id="quoteTotal">$82.54</div>
+                </div>
+                <div class="output-eta">
+                  <span class="output-label">Transit SLA</span>
+                  <strong id="quoteEta">Same Day (4–6 hrs)</strong>
+                </div>
+              </div>
+              <div class="output-breakdown" id="quoteBreakdown">
+                Base: $28.00 &bull; Weight: $51.75 &bull; Protection: $2.79
+              </div>
+            </div>
+
+            <button type="button" id="lockQuoteBtn" class="btn btn-primary btn-block">
+              Lock This Quote &amp; Request Dispatch &rarr;
+            </button>
+          </form>
+        </aside>
+      </div>
+    </section>
+
+    <!-- Service Pillars -->
+    <section class="section section-alt" id="services">
+      <div class="container">
+        <div class="section-header">
+          <span class="eyebrow">CORE CAPABILITIES</span>
+          <h2>Engineered for Modern Supply Chains</h2>
+          <p>Four integrated logistics pillars designed to reduce transit overhead and automate your fulfillment pipeline.</p>
+        </div>
+
+        <div class="pillars-grid">
+          <article class="pillar-card">
+            <div class="pillar-icon" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+              </svg>
+            </div>
+            <h3>Same-Day Metro Fleet</h3>
+            <p>Dedicated EV and commercial vans executing dynamic multi-stop urban routes with 99.4% SLA adherence.</p>
+            <span class="pillar-tag">4–6 Hour Window</span>
+          </article>
+
+          <article class="pillar-card">
+            <div class="pillar-icon" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+              </svg>
+            </div>
+            <h3>Transparent Algorithmic Pricing</h3>
+            <p>Zero hidden fuel surcharges or broker markups. Lock volume-tiered corridor pricing directly via our portal.</p>
+            <span class="pillar-tag">Up to 22% Cost Savings</span>
+          </article>
+
+          <article class="pillar-card">
+            <div class="pillar-icon" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/>
+              </svg>
+            </div>
+            <h3>API &amp; Webhook Telemetry</h3>
+            <p>Connect your ERP, Shopify, or Google Sheets CRM in minutes with real-time GPS webhooks and POD PDFs.</p>
+            <span class="pillar-tag">REST &amp; Webhook Ready</span>
+          </article>
+
+          <article class="pillar-card">
+            <div class="pillar-icon" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              </svg>
+            </div>
+            <h3>Cold-Chain &amp; High-Value</h3>
+            <p>IoT temperature-monitored compartments and chain-of-custody verification for medical and enterprise hardware.</p>
+            <span class="pillar-tag">2°C – 8°C Certified</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ Accordion -->
+    <section class="section" id="faq">
+      <div class="container faq-container">
+        <div class="section-header">
+          <span class="eyebrow">FREQUENTLY ASKED QUESTIONS</span>
+          <h2>Everything You Need to Know</h2>
+          <p>Clear answers on onboarding, SLA guarantees, and automated integrations.</p>
+        </div>
+
+        <div class="faq-list" id="faqList">
+          <div class="faq-item">
+            <button class="faq-trigger" aria-expanded="true">
+              <span>How fast can we onboard our warehouse or ERP system?</span>
+              <span class="faq-chevron" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-panel">
+              <p>Most B2B teams go live within 48 hours. You can book shipments immediately via our web portal, or connect your ERP/Google Sheets workflow using our pre-built webhook templates.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-trigger" aria-expanded="false">
+              <span>Are the rates shown in the instant quote estimator guaranteed?</span>
+              <span class="faq-chevron" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-panel" hidden>
+              <p>Yes. Quotes locked through the estimator remain valid for 72 hours for standard palletized or parcel freight matching the declared weight and corridor.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-trigger" aria-expanded="false">
+              <span>Do you support automated Proof of Delivery (POD) &amp; PDF invoicing?</span>
+              <span class="faq-chevron" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-panel" hidden>
+              <p>Every completed delivery triggers an instant webhook containing signed Proof of Delivery photos, timestamps, and an itemized PDF invoice pushed straight to your finance inbox.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-trigger" aria-expanded="false">
+              <span>What happens if a shipment misses its contracted SLA window?</span>
+              <span class="faq-chevron" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-panel" hidden>
+              <p>Our Enterprise SLA includes automatic 25% freight credit on any Priority or Same-Day shipment delayed beyond the contracted window due to carrier factors.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Validated Contact / Lead Form -->
+    <section class="section section-alt" id="contact">
+      <div class="container contact-grid">
+        <div class="contact-info">
+          <span class="eyebrow">READY TO SCALE</span>
+          <h2>Request Your Custom Dispatch Plan</h2>
+          <p>Submit your route details or locked quote below. Our logistics engineering team responds within 15 business minutes with a tailored SLA &amp; volume schedule.</p>
+          <ul class="check-list">
+            <li>Dedicated account &amp; route optimization engineer</li>
+            <li>Zero setup fees &amp; flexible monthly volume tiers</li>
+            <li>Sandbox API keys provisioned upon confirmation</li>
+          </ul>
+        </div>
+
+        <div class="contact-card">
+          <form id="leadForm" novalidate>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="fullName">Full Name *</label>
+                <input type="text" id="fullName" name="fullName" placeholder="Alex Rivera" required />
+                <span class="error-msg" id="errName"></span>
+              </div>
+              <div class="form-group">
+                <label for="companyName">Company *</label>
+                <input type="text" id="companyName" name="companyName" placeholder="Apex Supply Co." required />
+                <span class="error-msg" id="errCompany"></span>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="workEmail">Work Email *</label>
+              <input type="email" id="workEmail" name="workEmail" placeholder="alex@apexsupply.com" required />
+              <span class="error-msg" id="errEmail"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="quoteNotes">Shipment Details / Locked Quote</label>
+              <textarea id="quoteNotes" name="quoteNotes" rows="3" placeholder="Tell us about your monthly shipment volume or click 'Lock This Quote' above..."></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block btn-lg">Submit Dispatch Request</button>
+          </form>
+
+          <!-- Instant UI Confirmation State -->
+          <div id="formConfirmation" class="confirmation-box" hidden>
+            <div class="confirm-icon" aria-hidden="true">&#10003;</div>
+            <h3>Dispatch Request Confirmed!</h3>
+            <p id="confirmSummary"></p>
+            <div class="confirm-ref">Reference ID: <strong id="confirmRefId">SR-84920</strong></div>
+            <button type="button" id="resetFormBtn" class="btn btn-outline btn-sm">Submit Another Request</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <strong>SwiftRoute Logistics</strong>
+        <span>Original Open-Source Showcase &bull; Light-Mode B2B Conversion Architecture</span>
+      </div>
+      <div class="footer-links">
+        <a href="#services">Solutions</a>
+        <a href="#calculator">Estimator</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
